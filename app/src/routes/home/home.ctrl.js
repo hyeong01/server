@@ -1,14 +1,16 @@
 "use strict";
 
-const hello = (req, res) => {
+const output = {
+  home: (req, res)  => {
     res.render("home/index");
+  },
+  login: (req, res) => {
+    res.render("home/login");
+  },
 };
 
-const login = (req, res) => {
-    res.render("home/login");
-};
+c
 
 module.exports = {
-    hello,
-    login,
+    output
 };
