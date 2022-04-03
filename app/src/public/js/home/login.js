@@ -11,11 +11,20 @@ function login () {
     id: id.value,
     pswd: pswd.value,
   };
-  console.log(req, JSON.stringify(req))
-}
 
-fetch("/login", {
-    method: "POST"
-  body: JSON.stringify(req)
- // })
-//};
+  fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.success) {
+        location.href = "/";
+      } else {
+        alert(res.msg);
+      }
+    })
+}

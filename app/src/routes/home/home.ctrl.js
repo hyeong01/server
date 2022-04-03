@@ -1,5 +1,8 @@
 "use strict";
 
+const User = require("../../models/User");
+const UserStorage = require("../../models/UserStorage");
+
 const output = {
   home: (req, res)  => {
     res.render("home/index");
@@ -9,8 +12,15 @@ const output = {
   },
 };
 
-c
+const process = {
+  login: (req, res) => {
+    const user = new User(req.body);
+    const response = user.login();
+    return res.json(response)
+  },
+};
 
 module.exports = {
-    output
+    output,
+    process,
 };
