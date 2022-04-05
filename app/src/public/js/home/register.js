@@ -38,6 +38,7 @@ function register() {
         location.href = "/login";
       } else {
         alert(res.msg);
+        location.href = "/register";
       }
     })
 }
