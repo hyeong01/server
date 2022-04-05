@@ -1,22 +1,35 @@
 "use strict";
 
-class UserStorage {
-  static #users = {
-    id: ["123"],
-    pswd: ["123"],
-    name: ['우리밋']
-  };
+const fs = require('fs').promises;
 
-  static getUserInfo(id) {
-    const users = this.#users;
+class UserStorage {
+  static #getUserInfo(data, id) {
+    const users = JSON.parse(data);
     const idx = users.id.indexOf(id);
     const usersKeys = Object.keys(users);
     const userInfo = usersKeys.reduce((newUser, info) => {
-        newUser[info] = users[info][idx];
-        return newUser;
+      newUser[info] = users[info][idx];
+      return newUser;
     }, {});
-
+    
     return userInfo
+  }
+
+  static getUserInfo(id) {
+    return fs.readFile("./src/databases/users.json")
+      .then((data) => {
+        return this.#getUserInfo(data, id);
+      })
+      .catch(console.error);
+  }
+
+  static save(userInfo) {
+    // const users = this.#users;
+    users.id.push(userInfo.id);
+    users.pswd.push(userInfo.pswd)
+    users.email.push(userInfo.email)
+    console.log(users)
+
   }
 }
 
